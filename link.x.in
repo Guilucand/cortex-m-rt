@@ -158,6 +158,16 @@ SECTIONS
   }
 }
 
+SECTIONS {
+	. = ALIGN(4);
+	.crypto_data :
+      {
+        PROVIDE(__start_crypto_data = .);
+        KEEP(*(SORT(.crypto_data*)))
+        PROVIDE(__stop_crypto_data = .);
+      } > FLASH
+}
+
 /* Do not exceed this mark in the error messages below                                    | */
 /* # Alignment checks */
 ASSERT(ORIGIN(FLASH) % 4 == 0, "
